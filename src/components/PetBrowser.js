@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
+import Pet from './Pet'; // Ensure Pet is imported correctly
 
-import Pet from "./Pet";
+function PetBrowser({ pets = [], onAdoptPet }) {
+  const [petList, setPetList] = useState(pets);
 
-function PetBrowser() {
-  return <div className="ui cards">PET COMPONENT SHOULD GO HERE</div>;
+  useEffect(() => {
+    setPetList(pets);
+  }, [pets]);
+
+  return (
+    <div>
+      {petList.map(pet => (
+        <Pet key={pet.id} pet={pet} onAdoptPet={onAdoptPet} />
+      ))}
+    </div>
+  );
 }
 
 export default PetBrowser;
